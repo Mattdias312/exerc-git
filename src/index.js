@@ -6,7 +6,11 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get('/api/test', (req, res) => {
-  res.send('Hello world!!');
+  res.send({ 
+    message: 'Endpoint modificado na branch feature/alteracao-teste',
+    status: 'success',
+    code: 200
+  });
 });
 
 app.get('/api/test', (req, res) => {
