@@ -5,8 +5,11 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('/api', (req, res) => {
-  res.send('Hello world!!');
+app.get('/api/test', (req, res) => {
+  res.send({ 
+    message: 'Endpoint modificado na branch develop',
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.get('/api/test', (req, res) => {
