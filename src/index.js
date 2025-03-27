@@ -7,8 +7,9 @@ app.use(express.json());
 
 app.get('/api/test', (req, res) => {
   res.send({ 
-    message: 'Endpoint modificado na branch develop',
-    timestamp: new Date().toISOString()
+    message: 'Endpoint modificado na branch feature/alteracao-teste',
+    status: 'success',
+    code: 200
   });
 });
 
