@@ -1,0 +1,43 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run linter
+      run: npx eslint src/ tests/
+
+    - name: Run tests
+      run: npm test
+      env:
+        CI: true
+
+    - name: Send email notification on failure
+      if: failure()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.EMAIL_ORIGEM }}
+        password: ${{ secrets.SENHA_EMAIL }}
+        subject: '🚨 Falha nos testes - ${{ github.repository }}'
+        body: 'O workflow ${{ github.workflow }} falhou na execução dos testes. Detalhes: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+        to: matheusf.dias@hotmail.com
+        from: ${{ secrets.EMAIL_ORIGEM }}
