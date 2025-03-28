@@ -5,12 +5,16 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('/api', (req, res) => {
-  res.send('Hello world!');
+app.get('/api/test', (req, res) => {
+  res.send({ 
+    message: 'Endpoint modificado na branch feature/alteracao-teste',
+    status: 'success',
+    code: 200
+  });
 });
 
 app.get('/api/test', (req, res) => {
-  res.send({ message: 'Endpoint de teste na branch master com merge'});
+  res.send({ message: 'Endpoint de teste na branch master com merge.'});
 });
 
 app.get('/api/test-2', (req, res) => {
