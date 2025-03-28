@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('/api/test', (req, res) => {
+app.get('/api', (req, res) => {
   res.send({ 
     message: 'Endpoint modificado na branch feature/alteracao-teste',
     status: 'success',
